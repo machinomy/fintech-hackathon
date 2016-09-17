@@ -12,6 +12,7 @@ import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
 import { Profile } from './src/profile'
+import { LoanList } from './src/loan'
 
 
 const app = express();
@@ -25,15 +26,20 @@ app
   .get("/", (req, res) => {
     res.render('index', { 'hello': 'world' });
   })
-  .get("/profile/:profileId", (req, res) => {
-    res.render('profile', { profile: Profile.get(req.params.profileId) });
+  .get("/profile/:profileId", (req, res) => {let person = Profile.get(req.params.profileId);
+    let loanList = LoanList.get(person);
+    res.render(
+      'profile', {
+        profile: person,
+        loanList: loanList
+      }
+    );
   });
 
 const sockets = socketIO(http);
 
 sockets.on('connection', (socket) => {
   LOG.debug(`new client: ${socket.id}`);
-
 
   socket.on('find person', (msg) => {
     if (msg.length == 0) {
@@ -42,13 +48,23 @@ sockets.on('connection', (socket) => {
     }
     socket.emit('person found', {id: 'test_id'});
   });
-  
+
   socket.on('new person', (params) => {
     if (params === undefined) {
       socket.emit('new person error', {error: 'empty query'});
       return;
     }
     socket.emit('person created', params);
+  });
+
+  socket.on('check loan eligibility', (msg) => {
+    let response = null;
+    if (msg.amount > 300) {
+      response = {result: 'decline'}
+    } else {
+      response = {result: 'accept'}
+    }
+    socket.emit('check loan result', response);
   });
 });
 

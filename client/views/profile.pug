@@ -6,8 +6,32 @@ html
 
     body
         each value, field in profile
-            = `${field}: ${value}`
+            span #{field}: #{value}
             br
+
+        div(style='border: 1px black solid')
+            each loan in loanList
+                span #{loan.id} #{loan.amount} #{loan.currency} at #{loan.percentage}%
+                if loan.active
+                    span
+                        button Vnosit
+                        button Zakrivat
+                br
+            else
+                | No loans :sadface:
+
+        br
+        button#add_loan Plusik
+        | &nbsp;
+        button#eligibility_check_btn Znak voprosa
+
+        #check_modal(style='display: none')
+            div
+                form#eligibility_check
+                    input#eligibility_check_amount(type='text')
+                    button(type='submit') Zaprosit
+                #eligibility_result
+
 
 
         script(src='/scripts/profile.js')

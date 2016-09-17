@@ -3,19 +3,20 @@
 window.addEventListener("load", () => {
   const socket = io();
 
-  // const findPersonForm = window.find_person;
-  // findPersonForm.addEventListener('submit', function (ev) {
-  //   ev.preventDefault();
-  //   socket.emit("find person", findPersonForm.querySelector('input').value);
-  // });
-  //
-  // socket.on('find person error', (msg) => {
-  //   console.log(msg);
-  //   document.querySelector('pre').innerText = msg.error;
-  // });
-  //
-  // socket.on('person found', (msg) => {
-  //   console.log(msg);
-  //   window.location = `profile/${msg.id}`;
-  // });
+  socket.on('check loan result', (msg) => {
+  });
+
+  eligibility_check_btn.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    check_modal.setAttribute('style', '');
+  });
+
+  eligibility_check.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    socket.emit('check loan eligibility', {amount: eligibility_check_amount.value});
+  });
+
+  socket.on('check loan result', (msg) => {
+    eligibility_result.innerText = msg.result;
+  });
 });
