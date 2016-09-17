@@ -9,3 +9,36 @@ h1 {
 .hidden {
   display: none !important;
 }
+
+.new-person-btn {
+  margin: 20px; background: #DB5B85;
+  position: fixed;
+  right: 0;
+  width:50px;
+  height: 50px;
+  bottom: 0;
+}
+
+.calendar-icon {
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  color: #9e9e9e;
+}
+
+#hidden_datepicker {
+  display: none;
+}
+
+.modal.modal-fixed-footer {
+  max-height: 80% !important;
+  height: 80% !important;
+}
+
+.picker__wrap {
+  height: 90% !important;
+}
+
+.picker--opened .picker__frame {
+  top: 0 !important;
+}

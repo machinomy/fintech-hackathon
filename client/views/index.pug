@@ -1,49 +1,63 @@
-doctype 5
-html
-  head
-    link(rel='stylesheet', href='/styles/app.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css')
-    script(src='/socket.io/socket.io.js')
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0')
+        title Pizda govna
+        link(href='../styles/material-fonts.css', rel='stylesheet')
+        link(href='../styles/materialize.min.css', type='text/css', rel='stylesheet', media='screen,projection')
+        link(href='../styles/app.css', type='text/css', rel='stylesheet', media='screen,projection')
 
-  body
-    h1 Hello
-      = hello
+    body(style='background-color: #eee;')
+        // find person
+        .section.no-pad-bot
+            .container
+                br
+                br
+                h1.header.center(style='color: #27839c') μst
+                form#find_person(style='text-align: center')
+                    .input-field.center-align.col.s8
+                        input#find_person_data.validate(type='text')
+                        label.active(for='find_person_data') Данные заемщика (ФИО паспортные данные)
+                .row.center
+                    a.btn-floating.btn-large.modal-trigger.new-person-btn(href='#new_person_modal')
+                        i.material-icons add
 
-    form#find_person(style='text-align: center')
-      input(type='text', style='width: 80%; line-height: 26px; margin: 0 auto; display: block;')
-      button(type='submit', class='btn', style='margin-top: 20px') Mne povezet
-      br
-      a(href='#new_person_modal',
-        class='btn-floating btn-large modal-trigger',
-        style='font-size: 2em; margin-top: 20px') +
+        // new person
+        #new_person_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #27839c') μst
+            form#new_person.col.s12
+                .modal-content(style='height: initial')
+                    .row
+                        .input-field.col.s4
+                            input#first_name.validate(name='first_name', type='text')
+                            label(for='first_name') Имя
+                        .input-field.col.s4
+                            input#last_name.validate(name='last_name', type='text')
+                            label(for='last_name') Фамилия
+                        .input-field.col.s4
+                            input#sec_name.validate(name='sec_name', type='text')
+                            label(for='sec_name') Отчество
+                    .row
+                        .input-field.col.s4
+                            input#passport_number.validate(name='passport_number', type='text')
+                            label(for='passport_number') Серия
+                        .input-field.col.s8
+                            input#passport_series.validate(name='passport_series', type='text')
+                            label(for='passport_series') Номер
+                    .row
+                        .input-field.col.s4
+                            input#birth_date.validate(name='birth_date', type='text')
+                            label(for='birth_date') Дата рождения
+                            i.material-icons.calendar-icon today
+                        .input-field.col.s8
+                            input#birth_place.validate(name='birth_place', type='text')
+                            label(for='birth_place') Место рождения
+                .modal-footer
+                    button.btn(type='submit') Создать
 
-    pre
-
-    #new_person_modal.modal
-      form#new_person
-        .modal-content
-          h4 Create new pidor
-          pre#new_person_error
-          .row
-            .input-field.col.s6
-              input#first_name.validate(type='text', name='first_name')
-              label(for='first_name') First Name
-            .input-field.col.s6
-              input#last_name.validate(type='text', name='last_name')
-              label(for='last_name') Last Name
-          .row
-            .input-field.col.s4
-              input#passport_series.validate(type='text', name='passport_series')
-              label(for='passport_series') Passport Series
-            .input-field.col.s8
-              input#passport_number.validate(type='text', name='passport_number')
-              label(for='passport_number') Passport Number
-        .modal-footer
-          button.btn(type='submit') Create
-
-
-    script(src='https://code.jquery.com/jquery-2.2.4.min.js',
-           integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=',
-           crossorigin='anonymous')
-    script(src='/scripts/app.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')
+        // scripts
+        script(src='/socket.io/socket.io.js')
+        script(src='../scripts/jquery-2.1.1.min.js')
+        script(src='../scripts/materialize.min.js')
+        script(src='../scripts/app.js')
