@@ -68,6 +68,7 @@ window.addEventListener('load', () => {
     }],
     ['person created', (msg) => {
       console.log(msg);
+      window.new_person.reset();
       $(window.new_person_modal).closeModal();
       Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
     }],
@@ -78,22 +79,16 @@ window.addEventListener('load', () => {
   ]);
   
   $('.modal-trigger').leanModal();
+
+  let picker = $('#birth_date').pickadate({
+    selectMonths: true,
+    selectYears: 55
+  }).pickadate('picker');
+
+  picker.on('set', function (e) {
+    this.close();
+    $('#birth_place').trigger('focus');
+  });
+
 });
 
-
-
-
-// findPersonForm.addEventListener('submit', function (ev) {
-//   ev.preventDefault();
-//   socket.emit('find person', findPersonForm.querySelector('input').value);
-// });
-//
-// socket.on('find person error', (msg) => {
-//   console.log(msg);
-//   document.querySelector('pre').innerText = msg.error;
-// });
-//
-// socket.on('person found', (msg) => {
-//   console.log(msg);
-//   window.location = `profile/${msg.id}`;
-// });
