@@ -22,19 +22,19 @@ app.set('view engine', 'pug');
 app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render('index', { 'hello': 'world' });
-});
-app.get("/profile/:profileId", (req, res) => {
-  let person = Profile.get(req.params.profileId);
-  let loanList = LoanList.get(person);
-  res.render(
-    'profile', {
-      profile: person,
-      loanList: loanList
-    }
-  );
-});
+app
+  .get("/", (req, res) => {
+    res.render('index', { 'hello': 'world' });
+  })
+  .get("/profile/:profileId", (req, res) => {let person = Profile.get(req.params.profileId);
+    let loanList = LoanList.get(person);
+    res.render(
+      'profile', {
+        profile: person,
+        loanList: loanList
+      }
+    );
+  });
 
 const sockets = socketIO(http);
 
@@ -42,12 +42,19 @@ sockets.on('connection', (socket) => {
   LOG.debug(`new client: ${socket.id}`);
 
   socket.on('find person', (msg) => {
-    debugger;
     if (msg.length == 0) {
       socket.emit('find person error', {error: 'empty query'});
       return;
     }
     socket.emit('person found', {id: 'test_id'});
+  });
+
+  socket.on('new person', (params) => {
+    if (params === undefined) {
+      socket.emit('new person error', {error: 'empty query'});
+      return;
+    }
+    socket.emit('person created', params);
   });
 
   socket.on('check loan eligibility', (msg) => {

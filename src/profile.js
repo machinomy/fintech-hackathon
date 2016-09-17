@@ -1,17 +1,25 @@
 "use strict";
 
-export const Profile = {
-  get: (id) => {
-    return {
+class Profile {
+  static fetch (id) {
+    return new Profile({
       name: 'Name',
       lastName: 'Last Name',
-      surname: 'sur',
       passportNumber: 567890,
       passportSeries: 1234,
-      taxId: 'tax',
-      birthDate: '01/01/1990',
-      birthPlace: 'NY'
-    }
+    });
   }
 
-};
+  constructor(params) {
+    this.name = params.name;
+    this.lastName = params.lastName;
+    this.passportNumber = params.passportNumber;
+    this.passportSeries = params.passportSeries;
+  }
+
+  getFullQuery() {
+    return `${this.name} ${this.lastName} ${this.passportSeries} ${this.passportNumber}`
+  }
+}
+
+export { Profile };
