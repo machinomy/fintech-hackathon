@@ -37,6 +37,7 @@
     "express-compilers": "^3.0.13",
     "nodemon": "^1.10.2",
     "pug": "^2.0.0-beta6",
+    "request": "^2.74.0",
     "request-promise": "^4.1.1",
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",

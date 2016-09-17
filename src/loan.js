@@ -2,6 +2,11 @@
 
 import { LOG } from '../wrappers/logger';
 
+const getLoanListOpts = (profile) => {
+  return {
+    name: profile.getFullQuery()
+  }
+};
 
 const loans = [
   {
@@ -20,8 +25,8 @@ const loans = [
 ];
 
 const LoanList = {
-  get: (person) => {
-    // person ne nuzhni
+  get: (profile) => {
+    // profile ne nuzhni
     return loans.map((loanParams) => {
       return new Loan(loanParams);
     });
