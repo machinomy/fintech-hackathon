@@ -2,19 +2,48 @@ doctype 5
 html
   head
     link(rel='stylesheet', href='/styles/app.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css')
     script(src='/socket.io/socket.io.js')
 
   body
     h1 Hello
       = hello
 
-    form#find_person
+    form#find_person(style='text-align: center')
       input(type='text', style='width: 80%; line-height: 26px; margin: 0 auto; display: block;')
-      button(type='submit') Mne povezet
+      button(type='submit', class='btn', style='margin-top: 20px') Mne povezet
+      br
+      a(href='#new_person_modal',
+        class='btn-floating btn-large modal-trigger',
+        style='font-size: 2em; margin-top: 20px') +
 
     pre
 
-    form#new_person
-      button(type='submit', style='font-size: 60px') +
+    #new_person_modal.modal
+      form#new_person
+        .modal-content
+          h4 Create new pidor
+          pre#new_person_error
+          .row
+            .input-field.col.s6
+              input#first_name.validate(type='text', name='first_name')
+              label(for='first_name') First Name
+            .input-field.col.s6
+              input#last_name.validate(type='text', name='last_name')
+              label(for='last_name') Last Name
+          .row
+            .input-field.col.s4
+              input#passport_series.validate(type='text', name='passport_series')
+              label(for='passport_series') Passport Series
+            .input-field.col.s8
+              input#passport_number.validate(type='text', name='passport_number')
+              label(for='passport_number') Passport Number
+        .modal-footer
+          button.btn(type='submit') Create
 
+
+    script(src='https://code.jquery.com/jquery-2.2.4.min.js',
+           integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=',
+           crossorigin='anonymous')
     script(src='/scripts/app.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')

@@ -21,12 +21,13 @@ app.set('view engine', 'pug');
 app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render('index', { 'hello': 'world' });
-});
-app.get("/profile/:profileId", (req, res) => {
-  res.render('profile', { profile: Profile.get(req.params.profileId) });
-});
+app
+  .get("/", (req, res) => {
+    res.render('index', { 'hello': 'world' });
+  })
+  .get("/profile/:profileId", (req, res) => {
+    res.render('profile', { profile: Profile.get(req.params.profileId) });
+  });
 
 const sockets = socketIO(http);
 
@@ -35,12 +36,19 @@ sockets.on('connection', (socket) => {
 
 
   socket.on('find person', (msg) => {
-    debugger;
     if (msg.length == 0) {
       socket.emit('find person error', {error: 'empty query'});
       return;
     }
     socket.emit('person found', {id: 'test_id'});
+  });
+  
+  socket.on('new person', (params) => {
+    if (params === undefined) {
+      socket.emit('new person error', {error: 'empty query'});
+      return;
+    }
+    socket.emit('person created', params);
   });
 });
 
