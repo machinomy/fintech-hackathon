@@ -11,6 +11,8 @@ import bodyParser from 'body-parser';
 import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
+import { Profile } from './src/profile'
+
 
 const app = express();
 const http = Server(app);
@@ -22,15 +24,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.render('index', { 'hello': 'world' });
 });
+app.get("/profile/:profileId", (req, res) => {
+  res.render('profile', { profile: Profile.get(req.params.profileId) });
+});
 
 const sockets = socketIO(http);
 
 sockets.on('connection', (socket) => {
   LOG.debug(`new client: ${socket.id}`);
 
-  setInterval(() => {
-    socket.emit('test', `pizda govna ${new Date().toLocaleString()}`);
-  }, 1000);
+
+  socket.on('find person', (msg) => {
+    debugger;
+    if (msg.length == 0) {
+      socket.emit('find person error', {error: 'empty query'});
+      return;
+    }
+    socket.emit('person found', {id: 'test_id'});
+  });
 });
 
 const listener = http.listen(2042, () => {
