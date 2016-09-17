@@ -12,6 +12,7 @@ import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
 import { Profile } from './src/profile'
+import { LoanList } from './src/loan'
 
 
 const app = express();
@@ -25,14 +26,20 @@ app.get("/", (req, res) => {
   res.render('index', { 'hello': 'world' });
 });
 app.get("/profile/:profileId", (req, res) => {
-  res.render('profile', { profile: Profile.get(req.params.profileId) });
+  let person = Profile.get(req.params.profileId);
+  let loanList = LoanList.get(person);
+  res.render(
+    'profile', {
+      profile: person,
+      loanList: loanList
+    }
+  );
 });
 
 const sockets = socketIO(http);
 
 sockets.on('connection', (socket) => {
   LOG.debug(`new client: ${socket.id}`);
-
 
   socket.on('find person', (msg) => {
     debugger;
@@ -41,6 +48,16 @@ sockets.on('connection', (socket) => {
       return;
     }
     socket.emit('person found', {id: 'test_id'});
+  });
+
+  socket.on('check loan eligibility', (msg) => {
+    let response = null;
+    if (msg.amount > 300) {
+      response = {result: 'decline'}
+    } else {
+      response = {result: 'accept'}
+    }
+    socket.emit('check loan result', response);
   });
 });
 

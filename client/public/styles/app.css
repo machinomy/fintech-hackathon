@@ -5,3 +5,7 @@ html, body {
 h1 {
   color: darkgrey;
 }
+
+.hidden {
+  display: none !important;
+}
