@@ -25,15 +25,22 @@ app
   .get("/", (req, res) => {
     res.render('index');
   })
-  .get("/profile/:profileId", (req, res) => {
-    let person = Profile.fetch(req.params.profileId);
-    let loanList = LoanList.get(person);
-    res.render(
-      'profile', {
-        profile: person,
-        loanList: loanList
-      }
-    );
+  .get("/profile/:uuid", (req, res) => {
+    let getPersonReq = Profile.fetch(req.params.uuid);
+    let getLoansReq = Profile.getLoans(req.params.uuid);
+
+    Promise.all([getPersonReq, getLoansReq]).then((responses) => {
+      LOG.warn(responses);
+      let personInfo = responses[0].AddPerson;
+      let creditsList = responses[1].credits;
+      res.render(
+        'profile', {
+          profile: personInfo,
+          loanList: creditsList
+        }
+      );
+    });
+
   });
 
 const sockets = socketIO(http);
@@ -49,7 +56,7 @@ sockets.on('connection', (socket) => {
     let searchReq = Profile.search(msg);
     searchReq.then((body) => {
       LOG.debug(`search response: ${body}`);
-      socket.emit('person found', {uuid: body});
+      socket.emit('person found', {uuid: body.uuid});
     });
   });
 

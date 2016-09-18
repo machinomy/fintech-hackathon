@@ -4,7 +4,7 @@ import { LOG } from '../wrappers/logger';
 
 const getLoanListOpts = (profile) => {
   return {
-    name: profile.getFullQuery()
+    name: 'wot' //profile.getFullQuery()
   }
 };
 

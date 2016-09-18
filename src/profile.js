@@ -5,13 +5,7 @@ import { sha256 } from 'hash.js';
 
 class Profile {
   static fetch (uuid) {
-    Bergator.get('profile', {uuid: uuid});
-    return new Profile({
-      name: 'Name',
-      lastName: 'Last Name',
-      passportNumber: 567890,
-      passportSeries: 1234,
-    });
+    return Bergator.get('profile', {uuid: uuid});
   }
 
   static search (query) {
@@ -29,16 +23,16 @@ class Profile {
     });
   }
 
+  static getLoans (uuid) {
+    return Bergator.get('credits', {uuid: uuid});
+  }
+
   constructor(params) {
     this.name = params.first_name;
     this.lastName = params.last_name;
     this.passportNumber = params.passport_number;
     this.passportSeries = params.passport_series;
     this.birthDate = params.birth_date;
-  }
-
-  getFullQuery() {
-    return `${this.name} ${this.lastName} ${this.passportSeries} ${this.passportNumber}`
   }
 
   generatePassHash() {
