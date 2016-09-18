@@ -90,8 +90,12 @@ window.addEventListener('load', () => {
   });
 
   $('#passport_series').on('keyup', (e) => {
-    if ($(e.currentTarget).val().length === 4) $('#passport_number').trigger('focus');
-    if ($(e.currentTarget).val().length === 4) $('#passport_number').trigger('focus');
+    let v = $(e.currentTarget).val();
+    if (v.length > 4) {
+      v = v.slice(0, 4);
+      $(e.currentTarget).val(v);
+    }
+    if (v.length === 4) $('#passport_number').trigger('focus');
   });
 
   $('.modal-trigger').leanModal();
