@@ -18,6 +18,8 @@ html(lang='en')
                     .input-field.center-align.col.s8
                         input#find_person_data.validate(type='text')
                         label.active(for='find_person_data') Данные заемщика (ФИО паспортные данные)
+                        button#submit_find_person(type='submit')
+                            i.material-icons search
                 .row.center
                     a.btn-floating.btn-large.modal-trigger.new-person-btn(href='#new_person_modal')
                         i.material-icons add

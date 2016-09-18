@@ -21,7 +21,7 @@ html
                     span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
                     if loan.status == 'opened'
                         a.secondary-content
-                            i.close-loan.material-icons(style='cursor: pointer') highlight_off
+                            i.close-loan.material-icons(style='cursor: pointer;margin-left: 10px;') highlight_off
                         a.secondary-content.modal-trigger(href='#new_payment_modal', cuuid=loan.uuid)
                             i.add-payment.material-icons add
                 each payment in loan.payments

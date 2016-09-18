@@ -33,6 +33,20 @@ h1 {
   right: 160px;
 }
 
+#submit_find_person {
+  position: absolute;
+  background: none;
+  border: none;
+  right: 0;
+  top: 10px;
+  color: rgba(0, 0, 0, 0.3);
+  transition: color ease-in-out .2s;
+}
+
+#submit_find_person:hover {
+  color: rgba(0, 0, 0, .7);
+}
+
 .calendar-icon {
   position: absolute;
   top: 9px;
