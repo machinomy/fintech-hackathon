@@ -73,4 +73,24 @@ class Loan {
   }
 }
 
-export { Loan, Profile };
+class Payment {
+  constructor(params) {
+    this.amount = params.payment_amount;
+    this.profileUuid = params.uuid;
+    this.creditUuid = params.cuuid;
+  }
+
+  create() {
+    let params = {
+      uuid: this.profileUuid,
+      payment: {
+        amount: this.amount,
+        date: (new Date()).toLocaleDateString(),
+        creditUUID: this.creditUuid
+      }
+    };
+    return Bergator.post('payments', params);
+  }
+}
+
+export { Payment, Loan, Profile };

@@ -17,31 +17,15 @@ html
                     span(style='margin-left: 10px;') Открыт: #{loan.date}
                     span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
                     if loan.status == 'opened'
-                        a.secondary-content(href='#')
+                        a.secondary-content
                             i.close-loan.material-icons highlight_off
-                        a.secondary-content(href='#')
+                        a.secondary-content.modal-trigger(href='#new_payment_modal', cuuid=loan.uuid)
                             i.add-payment.material-icons add
-                .payments(name='payments')
-                    .sub_item
-                        span Сумма взноса: 3000$
-                        span.right Дата: 21.07.2011
-                    .sub_item
-                        span Сумма взноса: 3000$
-                        span.right Дата: 21.07.2011
-                    .sub_item
-                        span Сумма взноса: 3000$
-                        span.right Дата: 21.07.2011
-
-        .tpl.loan-tpl
-            +loanItem({
-                uuid: '{{uuid}}',
-                status: 'opened',
-                amount: '{{amount}}',
-                currency: '$',
-                percentage: '{{percentage}}',
-                date: '{{date}}',
-                time: '{{time}}'
-            })
+                each payment in loan.payments
+                    .payments(name='payments')
+                        .sub_item
+                            span Сумма взноса: #{payment.amount}
+                            span.right Дата: #{payment.amount}
 
         .row.center
             a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
@@ -93,6 +77,18 @@ html
                             label(for='time') Срок кредита
                 .modal-footer
                     button.btn(type='submit') Оформить
+
+        // new loan
+        #new_payment_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #585858') Взнос
+            form#new_payment
+                .modal-content(style='height: initial')
+                    .row
+                        .input-field.col.s12
+                            input#payment_amount.validate(name='payment_amount', type='text')
+                            label(for='payment_amount') Сумма взноса
+                .modal-footer
+                    button.btn(type='submit') Подтвердить
 
         script(src='/socket.io/socket.io.js')
         script(src='../scripts/jquery-2.1.1.min.js')

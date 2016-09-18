@@ -11,7 +11,7 @@ import bodyParser from 'body-parser';
 import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
-import { Loan, Profile } from './src/profile';
+import { Payment, Loan, Profile } from './src/profile';
 
 const app = express();
 const http = Server(app);
@@ -82,6 +82,18 @@ sockets.on('connection', (socket) => {
     let createReq = loan.create();
     createReq.then((body) => {
       socket.emit('loan created', body);
+    });
+  });
+
+  socket.on('new payment', (params) => {
+    if (params === undefined) {
+      socket.emit('new payment error', {error: 'empty query'});
+      return;
+    }
+    let payment = new Payment(params);
+    let createReq = payment.create();
+    createReq.then((body) => {
+      socket.emit('payment created', body);
     });
   });
 
