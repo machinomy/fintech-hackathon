@@ -10,7 +10,6 @@ html
 
     body(style='background-color: rgb(245, 245, 245)')
         mixin loanItem(loan)
-            - console.log(loan)
             - var icon = loan.approved ? 'thumb_up' : 'thumbs_up_down';
             li(data-uuid=loan.uuid, class=`${loan.status}_loan`)
                 div(style='padding: 12px;padding-left: 50px;position: relative;')
@@ -38,18 +37,19 @@ html
             a.btn-floating.btn-large.go-search-btn(href='/')
                 i.material-icons search
 
-        ul.collection.with-header.loans-list(style='background: white; margin-bottom: 90px')
-            li.collection-header
-                .row#profile_uuid(data-uuid=profile.uuid, style='margin-bottom: 0')
-                    .col
-                        i.material-icons(style='color: #999; background-color: #eee; font-size: 10em; cursor: pointer') perm_identity
-                    .col.s8
-                        h4 #{profile.firstName} #{profile.lastName}
-                        h4 #{profile.birthDate}
-            each loan in loanList
-                +loanItem(loan)
-            else
-                li(style='text-align: center; font-size: 2em; padding: 40px') Кредитная история пуста
+        div(style='width: 70%; margin: 0 auto')
+            ul.collection.with-header.loans-list(style='background: white; margin-bottom: 90px')
+                li.collection-header
+                    .row#profile_uuid(data-uuid=profile.uuid, style='margin-bottom: 0')
+                        .col
+                            i.material-icons(style='color: #999; background-color: #eee; font-size: 10em; cursor: pointer') perm_identity
+                        .col.s8
+                            h4 #{profile.firstName} #{profile.lastName}
+                            h4 #{profile.birthDate}
+                each loan in loanList
+                    +loanItem(loan)
+                else
+                    li(style='text-align: center; font-size: 2em; padding: 40px') Кредитная история пуста
 
         // check loan
         #check_loan_modal.modal.modal-fixed-footer
