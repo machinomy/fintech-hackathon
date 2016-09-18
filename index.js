@@ -12,6 +12,7 @@ import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
 import { Loan, Profile } from './src/profile';
+import { Bergator } from './src/bergator'
 
 const app = express();
 const http = Server(app);
@@ -93,6 +94,20 @@ sockets.on('connection', (socket) => {
       response = {result: 'accept'}
     }
     socket.emit('check loan result', response);
+  });
+
+  socket.on('close loan', (msg) => {
+    let yabyrgaReq = Bergator.yabyrga('credits', {
+      uuid: msg.personUuid,
+      closeCredit: {
+        date: (new Date()).toLocaleDateString(),
+        creditUUID: msg.creditUuid
+      }
+    });
+    yabyrgaReq.then((yabyrgaResult) => {
+      console.log(yabyrgaResult);
+      socket.emit('close loan result', {});
+    });
   });
 });
 
