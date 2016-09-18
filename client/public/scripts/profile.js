@@ -35,4 +35,7 @@ window.addEventListener("load", () => {
   // socket.on('check loan result', (msg) => {
   //   eligibility_result.innerText = msg.result;
   // });
+
+
+  $('.modal-trigger').leanModal();
 });

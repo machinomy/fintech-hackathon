@@ -8,7 +8,7 @@ html
         link(href='../styles/materialize.min.css', type='text/css', rel='stylesheet', media='screen,projection')
         link(href='../styles/app.css', type='text/css', rel='stylesheet', media='screen,projection')
 
-    body
+    body(style='rgb(245, 245, 245)')
         .row.center
             a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
                 i.material-icons add
@@ -47,26 +47,31 @@ html
             else
                 li No loans :~(
 
-        #check_loan_modal(style='display: none')
-            div
-                form#eligibility_check
-                    input#eligibility_check_amount(type='text')
-                    button(type='submit') Zaprosit
-                #eligibility_result
+        // check loan
+        #check_loan_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #27839c') μst
+            form#check_loan
+                .modal-content(style='height: initial')
+                    .row
+                        .input-field.col.s12
+                            input#credit_sum2.validate(name='credit_sum2', type='text')
+                            label(for='credit_sum2') Сумма кредита
+                .modal-footer
+                    button.btn(type='submit') Запросить
 
         // new loan
         #new_loan_modal.modal.modal-fixed-footer
             h1.header.center(style='color: #27839c') μst
             form#new_loan
-                .modal-content
+                .modal-content(style='height: initial')
                     .row
-                        .input-field
+                        .input-field.col.s12
                             input#credit_sum.validate(name='credit_sum', type='text')
                             label(for='credit_sum') Сумма кредита
-                        .input-field
+                        .input-field.col.s12
                             input#percent.validate(name='percent', type='text')
                             label(for='percent') Процентная ставка
-                        .input-field
+                        .input-field.col.s12
                             input#time.validate(name='time', type='text')
                             label(for='time') Срок кредита
                 .modal-footer
