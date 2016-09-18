@@ -26,11 +26,16 @@ window.addEventListener("load", () => {
   const checkLoanForm = window.check_loan;
   sRouter.listenForm(checkLoanForm, [
     ['check loan eligibility', (form) => {
-      return $('input', form).val();
+      return $(form).serializeToObject();
     }],
     ['check loan result', (msg) => {
       console.log('Check loan', msg);
-      $('.loan-check-result').html('asfaf');
+      let txt = (msg.result === 'accept') ? 'Можно' : 'Нельзя';
+      $('.loan-check-result')
+        .removeClass('accept')
+        .removeClass('decline')
+        .addClass(msg.result)
+        .html(txt);
     }],
     ['check loan error', (msg) => {
       console.log(msg);
