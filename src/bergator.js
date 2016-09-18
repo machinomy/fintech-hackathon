@@ -6,7 +6,8 @@ const base = 'http://localhost:9000/';
 
 const endpoints = {
   profile: 'persons/',
-  credits: 'credits/'
+  credits: 'credits/',
+  payments: 'credits/payments'
 };
 
 const doPostAnyway = (uri, opts) => {
@@ -36,6 +37,11 @@ export const Bergator = {
 
   search: (ep, opts) => {
     let uri = base + endpoints[ep] + 'search';
+    return doPostAnyway(uri, opts);
+  },
+
+  yabyrga: (ep, opts) => {
+    let uri = base + endpoints[ep] + 'yabyrga';
     return doPostAnyway(uri, opts);
   }
 };

@@ -12,7 +12,6 @@ window.addEventListener("load", () => {
     }],
     ['loan created', (msg) => {
       console.log('Create new loan', msg);
-      // window.new_loan.reset();
       Materialize.toast(`Loan was sexesfully created!`, 4000);
       $(window.new_loan_modal).closeModal();
     }],
@@ -36,20 +35,6 @@ window.addEventListener("load", () => {
       console.log(msg);
     }]
   ]);
-  //
-  // $('.check-loan-btn').addEventListener('click', (ev) => {
-  //   ev.preventDefault();
-  //   // $('#check_loan_modal').setAttribute('style', '');
-  // });
-
-  // eligibility_check.addEventListener('submit', (ev) => {
-  //   ev.preventDefault();
-  //   socket.emit('check loan eligibility', {amount: eligibility_check_amount.value});
-  // });
-
-  // socket.on('check loan result', (msg) => {
-  //   eligibility_result.innerText = msg.result;
-  // });
 
 
   $('.modal-trigger').leanModal();
