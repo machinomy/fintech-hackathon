@@ -14,19 +14,7 @@ window.addEventListener("load", () => {
     }],
     ['loan created', (msg) => {
       console.log('Create new loan', msg);
-      let loanHtml = $('.loan-tpl').html(),
-          f = $(newLoanForm).serializeToObject();
-      loanHtml =
-        loanHtml
-          .replace('{{uuid}}', msg.uuid)
-          .replace('{{amount}}', f.credit_sum)
-          .replace('{{percentage}}', f.percentage)
-          .replace('{{time}}', f.time)
-          .replace('{{date}}', (new Date()).toLocaleDateString());
-      $('.loans-list').append($(loanHtml));
-      cleanForm(new_loan);
-      Materialize.toast(`Кредит успешно оформлен!`, 4000);
-      $(window.new_loan_modal).closeModal();
+      location.reload();
     }],
     ['new loan error', (msg) => {
       console.log(msg);
@@ -54,6 +42,25 @@ window.addEventListener("load", () => {
     }]
   ]);
 
+  /* Check Loan socket */
+  const newPaymentForm = window.new_payment;
+  sRouter.listenForm(newPaymentForm, [
+    ['new payment', (form) => {
+      let form2 = $(form).serializeToObject();
+      form2.uuid = profile_uuid.getAttribute('data-uuid');
+      form2.cuuid = new_payment.getAttribute('data-cuuid')
+      return form2;
+    }],
+    ['payment created', (msg) => {
+      console.log('Create payment', msg);
+      location.reload();
+    }],
+    ['new payment error', (msg) => {
+      console.log(msg);
+    }]
+  ]);
+
+  /* Check Loan socket */
   $('.close-loan').on('click', (ev) => {
     ev.preventDefault();
     let $this = $(ev.currentTarget);
@@ -64,9 +71,12 @@ window.addEventListener("load", () => {
     socket.on('close loan result', (_) => {
       location.reload();
     });
-
   });
 
 
-  $('.modal-trigger').leanModal();
+  $('.modal-trigger').each((_i, el) => {
+    $(el).leanModal({
+      ready: function(e) { $(window.new_payment).attr('data-cuuid', $(el).attr('cuuid')); }
+    });
+  });
 });

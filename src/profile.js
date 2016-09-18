@@ -75,23 +75,22 @@ class Loan {
 
 class Payment {
   constructor(params) {
-    this.personUuid = params.personUuid;
-    this.amount = params.amount;
-    this.date = params.date;
-    this.creditUUID = params.creditUUID;
+    this.amount = params.payment_amount;
+    this.profileUuid = params.uuid;
+    this.creditUuid = params.cuuid;
   }
 
   create() {
     let params = {
-      uuid: this.personUuid,
+      uuid: this.profileUuid,
       payment: {
         amount: this.amount,
         date: (new Date()).toLocaleDateString(),
-        creditUUID: this.creditUUID
+        creditUUID: this.creditUuid
       }
     };
-    return Bergator.post('credits', params);
+    return Bergator.post('payments', params);
   }
 }
 
-export { Loan, Profile };
+export { Payment, Loan, Profile };

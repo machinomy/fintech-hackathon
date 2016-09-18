@@ -7,7 +7,7 @@ const base = 'http://localhost:9000/';
 const endpoints = {
   profile: 'persons/',
   credits: 'credits/',
-  payments: 'credits/payments'
+  payments: 'credits/payments/'
 };
 
 const doPostAnyway = (uri, opts) => {
