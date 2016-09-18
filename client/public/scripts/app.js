@@ -68,9 +68,10 @@ window.addEventListener('load', () => {
     }],
     ['person created', (msg) => {
       console.log(msg);
-      window.new_person.reset();
+      // window.new_person.reset();
+      // Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
       $(window.new_person_modal).closeModal();
-      Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
+      window.location = '/profile/' + msg.uuid;
     }],
     ['new person error', (msg) => {
       console.log(msg);

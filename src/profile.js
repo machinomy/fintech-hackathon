@@ -15,10 +15,10 @@ class Profile {
   }
 
   constructor(params) {
-    this.name = params.name;
-    this.lastName = params.lastName;
-    this.passportNumber = params.passportNumber;
-    this.passportSeries = params.passportSeries;
+    this.name = params.first_name;
+    this.lastName = params.last_name;
+    this.passportNumber = params.passport_number;
+    this.passportSeries = params.passport_series;
   }
 
   getFullQuery() {
