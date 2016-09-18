@@ -54,19 +54,19 @@ h1 {
 }
 
 .good_loan {
-  background-color: #ccdcff;
+  background-color: #99f39c;
   margin: 0;
   padding: 0;
 }
 
 .bad_loan {
-  background-color: rgba(244, 67, 54, 0.37);
+  background-color: #ffc2bd;
   margin: 0;
   padding: 0;
 }
 
 .open_loan {
-  background-color: rgba(76, 175, 80, 0.18);
+  background-color: #ccdcff;
   margin: 0;
   padding: 0;
 }

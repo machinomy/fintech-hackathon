@@ -26,8 +26,7 @@ const loans = [
     currency: 'USDEUR',
     date: '21.06.5789',
     time: '12',
-    status: 'good',
-    active: true
+    status: 'good'
   },
   {
     id: 3,
@@ -36,7 +35,8 @@ const loans = [
     date: '78.89.1239',
     time: '99999',
     status: 'open',
-    currency: 'USDEUR'
+    currency: 'USDEUR',
+    active: true
   }
 ];
 
