@@ -77,8 +77,6 @@ window.addEventListener('load', () => {
       $(window.new_person_error).text(msg.error);
     }]
   ]);
-  
-  $('.modal-trigger').leanModal();
 
   let picker = $('#birth_date').pickadate({
     selectMonths: true,
@@ -89,6 +87,13 @@ window.addEventListener('load', () => {
     this.close();
     $('#birth_place').trigger('focus');
   });
+
+  $('#passport_series').on('keyup', (e) => {
+    if ($(e.currentTarget).val().length === 4) $('#passport_number').trigger('focus');
+    if ($(e.currentTarget).val().length === 4) $('#passport_number').trigger('focus');
+  });
+
+  $('.modal-trigger').leanModal();
 
 });
 
