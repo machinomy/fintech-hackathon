@@ -10,8 +10,11 @@ html
 
     body(style='background-color: rgb(245, 245, 245)')
         mixin loanItem(loan)
+            - console.log(loan)
+            - var icon = loan.approved ? 'thumb_up' : 'thumbs_up_down';
             li(data-uuid=loan.uuid, class=`${loan.status}_loan`)
-                div(style='padding: 12px;')
+                div(style='padding: 12px;padding-left: 50px;position: relative;')
+                    i.material-icons(style='left: 15px;position: absolute;top: 10px;color:#26a69a;')= icon
                     span Сумма кредита: #{loan.amount}$
                     span(style='margin-left: 10px;') Процент: #{loan.percentage}%
                     span(style='margin-left: 10px;') Открыт: #{loan.date}
