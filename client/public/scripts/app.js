@@ -52,7 +52,7 @@ window.addEventListener('load', () => {
     }],
     ['person found', (msg) => {
       console.log(msg);
-      // window.location = `profile/${msg.id}`;
+      window.location = `profile/${msg.uuid}`;
     }],
     ['find person error', (msg) => {
       console.log(msg);
@@ -68,9 +68,6 @@ window.addEventListener('load', () => {
     }],
     ['person created', (msg) => {
       console.log(msg);
-      // window.new_person.reset();
-      // Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
-      debugger;
       $(window.new_person_modal).closeModal();
       window.location = '/profile/' + msg.uuid;
     }],
