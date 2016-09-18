@@ -90,7 +90,6 @@ window.addEventListener('load', () => {
 
   $('#passport_series').on('keyup', (e) => {
     let v = $(e.currentTarget).val();
-    console.log(v);
     if (v.length > 4) {
       v = v.slice(0, 4);
       $(e.currentTarget).val(v);
