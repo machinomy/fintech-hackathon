@@ -18,13 +18,13 @@ html
                     span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
                     if loan.status == 'opened'
                         a.secondary-content
-                            i.close-loan.material-icons highlight_off
+                            i.close-loan.material-icons(style='cursor: pointer') highlight_off
                         a.secondary-content.modal-trigger(href='#new_payment_modal', cuuid=loan.uuid)
                             i.add-payment.material-icons add
                 each payment in loan.payments
                     .payments(name='payments')
                         .sub_item
-                            span Сумма взноса: #{payment.amount}
+                            span Сумма взноса: #{payment.amount}$
                             span.right Дата: #{payment.date}
 
         .row.center
@@ -37,7 +37,7 @@ html
             li.collection-header
                 .row#profile_uuid(data-uuid=profile.uuid, style='margin-bottom: 0')
                     .col
-                        i.material-icons(style='color: #999; background-color: #eee; font-size: 10em') perm_identity
+                        i.material-icons(style='color: #999; background-color: #eee; font-size: 10em; cursor: pointer') perm_identity
                     .col.s8
                         h4 #{profile.firstName} #{profile.lastName}
                         h4 #{profile.birthDate}

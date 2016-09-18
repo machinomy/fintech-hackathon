@@ -63,6 +63,12 @@ h1 {
   padding: 0;
 }
 
+.closed_loan {
+  background-color: #99f39c;
+  margin: 0;
+  padding: 0;
+}
+
 .bad_loan {
   background-color: #ffc2bd;
   margin: 0;
