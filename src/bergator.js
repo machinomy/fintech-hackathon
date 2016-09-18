@@ -14,21 +14,28 @@ const doPostAnyway = (uri, opts) => {
     method: 'POST',
     uri: uri,
     body: opts,
-    headers: {},
     json: true
   };
+
+  console.log('query');
+  console.log(query);
 
   return rp(query);
 };
 
 export const Bergator = {
   get: (endpoint, opts) => {
-    let uri = endpoints[endpoint] + 'get';
+    let uri = base + endpoints[endpoint] + 'get';
     return doPostAnyway(uri, opts);
   },
 
   post: (endpoint, opts) => {
-    let uri = endpoints[endpoint] + 'new';
+    let uri = base + endpoints[endpoint] + 'new';
+    return doPostAnyway(uri, opts);
+  },
+
+  search: (ep, opts) => {
+    let uri = base + endpoints[ep] + 'search';
     return doPostAnyway(uri, opts);
   }
 };

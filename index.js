@@ -46,7 +46,11 @@ sockets.on('connection', (socket) => {
       socket.emit('find person error', {error: 'empty query'});
       return;
     }
-    socket.emit('person found', {id: 'test_id'});
+    let searchReq = Profile.search(msg);
+    searchReq.then((body) => {
+      LOG.debug(`search response: ${body}`);
+      socket.emit('person found', {uuid: body});
+    });
   });
 
   socket.on('new person', (params) => {

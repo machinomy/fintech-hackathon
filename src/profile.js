@@ -1,6 +1,6 @@
 "use strict";
 
-import Bergator from './bergator';
+import { Bergator } from './bergator';
 import { sha256 } from 'hash.js';
 
 class Profile {
@@ -14,11 +14,27 @@ class Profile {
     });
   }
 
+  static search (query) {
+    let [fName, lName, pSeries, pNum] = query.split(' ');
+    let person = new Profile({
+      first_name: fName,
+      last_name: lName,
+      passport_series: pSeries,
+      passport_number: pNum
+    });
+    return Bergator.search('profile', {
+      firstName: fName,
+      lastName: lName,
+      passportHash: person.generatePassHash()
+    });
+  }
+
   constructor(params) {
     this.name = params.first_name;
     this.lastName = params.last_name;
     this.passportNumber = params.passport_number;
     this.passportSeries = params.passport_series;
+    this.birthDate = params.birth_date;
   }
 
   getFullQuery() {
@@ -34,6 +50,7 @@ class Profile {
     let params = {
       firstName: this.name,
       lastName: this.lastName,
+      birthDate: this.birthDate,
       passportHash: this.generatePassHash()
     };
     return Bergator.post('profile', params);
