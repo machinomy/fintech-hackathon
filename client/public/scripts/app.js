@@ -64,6 +64,6 @@ window.addEventListener('load', () => {
   });
 
   $('.modal-trigger').leanModal();
-
+  $('#find_person_data').focus();
 });
 
