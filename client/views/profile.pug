@@ -25,7 +25,7 @@ html
                     .payments(name='payments')
                         .sub_item
                             span Сумма взноса: #{payment.amount}
-                            span.right Дата: #{payment.amount}
+                            span.right Дата: #{payment.date}
 
         .row.center
             a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
@@ -35,9 +35,9 @@ html
 
         ul.collection.with-header.loans-list(style='background: white; margin-bottom: 90px')
             li.collection-header
-                .row#profile_uuid(data-uuid=profile.uuid)
+                .row#profile_uuid(data-uuid=profile.uuid, style='margin-bottom: 0')
                     .col
-                        img.ava(src=profile.img)
+                        i.material-icons(style='color: #999; background-color: #eee; font-size: 10em') perm_identity
                     .col.s8
                         h4 #{profile.firstName} #{profile.lastName}
                         h4 #{profile.birthDate}
