@@ -106,3 +106,7 @@ h1 {
   font-size: 3em;
   padding: 40px;
 }
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+}

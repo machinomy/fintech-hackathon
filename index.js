@@ -11,7 +11,7 @@ import bodyParser from 'body-parser';
 import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
-import { Profile } from './src/profile'
+import { Loan, Profile } from './src/profile'
 import { LoanList } from './src/loan'
 
 const app = express();
@@ -33,6 +33,7 @@ app
       LOG.warn(responses);
       let personInfo = responses[0].AddPerson;
       let creditsList = responses[1].credits;
+      personInfo.img = '../images/ava.png';
       res.render(
         'profile', {
           profile: personInfo,
@@ -69,6 +70,18 @@ sockets.on('connection', (socket) => {
     let createReq = person.create();
     createReq.then((body) => {
       socket.emit('person created', body);
+    });
+  });
+
+  socket.on('new loan', (params) => {
+    if (params === undefined) {
+      socket.emit('new loan error', {error: 'empty query'});
+      return;
+    }
+    let loan = new Loan(params);
+    let createReq = loan.create();
+    createReq.then((body) => {
+      socket.emit('loan created', body);
     });
   });
 

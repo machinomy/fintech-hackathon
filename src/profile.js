@@ -51,4 +51,21 @@ class Profile {
   }
 }
 
-export { Profile };
+class Loan {
+  constructor(params) {
+    this.amount = params.amount;
+    this.percentage = params.percentage;
+    this.time = params.time;
+  }
+
+  create() {
+    let params = {
+      amount: this.amount,
+      percentage: this.percentage,
+      time: this.time
+    };
+    return Bergator.post('loan', params);
+  }
+}
+
+export { Loan, Profile };

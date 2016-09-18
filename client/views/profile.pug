@@ -8,7 +8,7 @@ html
         link(href='../styles/materialize.min.css', type='text/css', rel='stylesheet', media='screen,projection')
         link(href='../styles/app.css', type='text/css', rel='stylesheet', media='screen,projection')
 
-    body(style='rgb(245, 245, 245)')
+    body(style='background-color: rgb(245, 245, 245)')
         .row.center
             a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
                 i.material-icons add
@@ -18,7 +18,7 @@ html
         ul.collection.with-header(style='background: white')
             li.collection-header
                 .row
-                    .col.s4
+                    .col
                         img.ava(src=profile.img)
                     .col.s8
                         h4 #{profile.firstName} #{profile.lastName}
@@ -46,7 +46,7 @@ html
                             span Сумма взноса: 3000$
                             span.right Дата: 21.07.2011
             else
-                li No loans :~(
+                li(style='text-align: center; font-size: 2em; padding: 40px') Кредитная история пуста
 
         // check loan
         #check_loan_modal.modal.modal-fixed-footer
@@ -72,8 +72,8 @@ html
                             input#credit_sum.validate(name='credit_sum', type='text')
                             label(for='credit_sum') Сумма кредита
                         .input-field.col.s12
-                            input#percent.validate(name='percent', type='text')
-                            label(for='percent') Процентная ставка
+                            input#percentage.validate(name='percentage', type='text')
+                            label(for='percentage') Процентная ставка
                         .input-field.col.s12
                             input#time.validate(name='time', type='text')
                             label(for='time') Срок кредита

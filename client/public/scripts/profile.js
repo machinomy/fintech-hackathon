@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     }],
     ['loan created', (msg) => {
       console.log('Create new loan', msg);
-      // window.new_loan.reset();
+      cleanForm(new_loan);
       Materialize.toast(`Loan was sexesfully created!`, 4000);
       $(window.new_loan_modal).closeModal();
     }],

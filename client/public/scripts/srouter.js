@@ -14,6 +14,13 @@ $.fn.serializeToObject = function () {
   return o;
 };
 
+window.cleanForm = (form) => {
+  $.each($('input', form), function (index, el) {
+    el.value = '';
+    el.focus();
+  });
+}
+
 /* Socket Router class */
 class MagicSocketRouter {
   constructor (socket) {
