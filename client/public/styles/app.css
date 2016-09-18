@@ -69,7 +69,7 @@ h1 {
   padding: 0;
 }
 
-.open_loan {
+.opened_loan {
   background-color: #ccdcff;
   margin: 0;
   padding: 0;
@@ -109,4 +109,8 @@ h1 {
 
 input:-webkit-autofill {
   background-color: transparent !important;
+}
+
+.tpl, .tpl * {
+  display: none;
 }

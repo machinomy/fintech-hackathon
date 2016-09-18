@@ -14,6 +14,16 @@ window.addEventListener("load", () => {
     }],
     ['loan created', (msg) => {
       console.log('Create new loan', msg);
+      let loanHtml = $('.loan-tpl').html(),
+          f = $(newLoanForm).serializeToObject();
+      loanHtml =
+        loanHtml
+          .replace('{{uuid}}', msg.uuid)
+          .replace('{{amount}}', f.credit_sum)
+          .replace('{{percentage}}', f.percentage)
+          .replace('{{time}}', f.time)
+          .replace('{{date}}', (new Date()).toLocaleDateString());
+      $('.loans-list').append($(loanHtml));
       cleanForm(new_loan);
       Materialize.toast(`Кредит успешно оформлен!`, 4000);
       $(window.new_loan_modal).closeModal();

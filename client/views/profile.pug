@@ -9,13 +9,47 @@ html
         link(href='../styles/app.css', type='text/css', rel='stylesheet', media='screen,projection')
 
     body(style='background-color: rgb(245, 245, 245)')
+        mixin loanItem(loan)
+            li(data-uuid=loan.uuid, class=`${loan.status}_loan`)
+                div(style='padding: 12px;')
+                    span Сумма кредита: #{loan.amount}$
+                    span(style='margin-left: 10px;') Процент: #{loan.percentage}%
+                    span(style='margin-left: 10px;') Открыт: #{loan.date}
+                    span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
+                    if loan.status == 'opened'
+                        a.secondary-content(href='#')
+                            i.close-loan.material-icons highlight_off
+                        a.secondary-content(href='#')
+                            i.add-payment.material-icons add
+                .payments(name='payments')
+                    .sub_item
+                        span Сумма взноса: 3000$
+                        span.right Дата: 21.07.2011
+                    .sub_item
+                        span Сумма взноса: 3000$
+                        span.right Дата: 21.07.2011
+                    .sub_item
+                        span Сумма взноса: 3000$
+                        span.right Дата: 21.07.2011
+
+        .tpl.loan-tpl
+            +loanItem({
+                uuid: '{{uuid}}',
+                status: 'opened',
+                amount: '{{amount}}',
+                currency: '$',
+                percentage: '{{percentage}}',
+                date: '{{date}}',
+                time: '{{time}}'
+            })
+
         .row.center
             a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
                 i.material-icons add
             a.btn-floating.btn-large.modal-trigger.check-loan-btn(href='#check_loan_modal')
                 i.material-icons visibility
 
-        ul.collection.with-header(style='background: white')
+        ul.collection.with-header.loans-list(style='background: white; margin-bottom: 90px')
             li.collection-header
                 .row#profile_uuid(data-uuid=profile.uuid)
                     .col
@@ -24,27 +58,7 @@ html
                         h4 #{profile.firstName} #{profile.lastName}
                         h4 #{profile.birthDate}
             each loan in loanList
-                li(data-uuid=loan.id, class=`${loan.status}_loan`)
-                    div(style='padding: 12px;')
-                        span Сумма кредита: #{loan.amount}#{loan.currency}
-                        span(style='margin-left: 10px;') Процент: #{loan.percentage}%
-                        span(style='margin-left: 10px;') Открыт: #{loan.date}
-                        span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
-                        if loan.active
-                            a.secondary-content(href='#')
-                                i.close-loan.material-icons highlight_off
-                            a.secondary-content(href='#')
-                                i.add-payment.material-icons add
-                    .payments(name='payments')
-                        .sub_item
-                            span Сумма взноса: 3000$
-                            span.right Дата: 21.07.2011
-                        .sub_item
-                            span Сумма взноса: 3000$
-                            span.right Дата: 21.07.2011
-                        .sub_item
-                            span Сумма взноса: 3000$
-                            span.right Дата: 21.07.2011
+                +loanItem(loan)
             else
                 li(style='text-align: center; font-size: 2em; padding: 40px') Кредитная история пуста
 

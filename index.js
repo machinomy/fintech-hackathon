@@ -11,8 +11,7 @@ import bodyParser from 'body-parser';
 import socketIO from 'socket.io';
 
 import { LOG } from './wrappers/logger';
-import { Loan, Profile } from './src/profile'
-import { LoanList } from './src/loan'
+import { Loan, Profile } from './src/profile';
 
 const app = express();
 const http = Server(app);
