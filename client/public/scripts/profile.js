@@ -21,6 +21,21 @@ window.addEventListener("load", () => {
       $(window.new_loan_error).text(msg.error);
     }]
   ]);
+
+  /* Check Loan socket */
+  const checkLoanForm = window.check_loan;
+  sRouter.listenForm(checkLoanForm, [
+    ['check loan eligibility', (form) => {
+      return $('input', form).val();
+    }],
+    ['check loan result', (msg) => {
+      console.log('Check loan', msg);
+      $('.loan-check-result').html('asfaf');
+    }],
+    ['check loan error', (msg) => {
+      console.log(msg);
+    }]
+  ]);
   //
   // $('.check-loan-btn').addEventListener('click', (ev) => {
   //   ev.preventDefault();

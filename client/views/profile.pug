@@ -21,7 +21,8 @@ html
                     .col.s4
                         img.ava(src=profile.img)
                     .col.s8
-                        h4 #{profile.first_name} #{profile.last_name}
+                        h4 #{profile.firstName} #{profile.lastName}
+                        h4 #{profile.birthDate}
             each loan in loanList
                 li(data-uuid=loan.id, class=`${loan.status}_loan`)
                     div(style='padding: 12px;')
@@ -56,6 +57,8 @@ html
                         .input-field.col.s12
                             input#credit_sum2.validate(name='credit_sum2', type='text')
                             label(for='credit_sum2') Сумма кредита
+                        .col.s12
+                            .loan-check-result
                 .modal-footer
                     button.btn(type='submit') Запросить
 
