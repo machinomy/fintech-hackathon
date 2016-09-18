@@ -7,7 +7,6 @@ html
 
   body
     h1 Hello
-      = hello
 
     form#find_person(style='text-align: center')
       input(type='text', style='width: 80%; line-height: 26px; margin: 0 auto; display: block;')
@@ -42,8 +41,6 @@ html
           button.btn(type='submit') Create
 
 
-    script(src='https://code.jquery.com/jquery-2.2.4.min.js',
-           integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=',
-           crossorigin='anonymous')
+    script(src='/scripts/jquery-2.2.4.min.js')
     script(src='/scripts/app.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')

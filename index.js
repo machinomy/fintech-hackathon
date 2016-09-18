@@ -14,7 +14,6 @@ import { LOG } from './wrappers/logger';
 import { Profile } from './src/profile'
 import { LoanList } from './src/loan'
 
-
 const app = express();
 const http = Server(app);
 app.set('views', './client/views');
@@ -24,9 +23,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app
   .get("/", (req, res) => {
-    res.render('index', { 'hello': 'world' });
+    res.render('index');
   })
-  .get("/profile/:profileId", (req, res) => {let person = Profile.get(req.params.profileId);
+  .get("/profile/:profileId", (req, res) => {
+    let person = Profile.fetch(req.params.profileId);
     let loanList = LoanList.get(person);
     res.render(
       'profile', {
