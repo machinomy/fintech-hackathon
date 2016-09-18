@@ -10,13 +10,18 @@ h1 {
   display: none !important;
 }
 
-.new-person-btn {
-  margin: 20px; background: #DB5B85;
+.new-person-btn,
+.new-loan-btn,
+.check-loan-btn {
   position: fixed;
-  right: 0;
-  width:50px;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
   height: 50px;
-  bottom: 0;
+}
+
+.check-loan-btn {
+  right: 90px;
 }
 
 .calendar-icon {
@@ -41,4 +46,37 @@ h1 {
 
 .picker--opened .picker__frame {
   top: 0 !important;
+}
+
+.sub_item {
+  padding: 0 20px 0 50px;
+  font-size: 12px;
+}
+
+.good_loan {
+  background: rgba(76, 175, 80, 0.18);
+  margin: 0;
+  padding: 0;
+}
+
+.bad_loan {
+  background: rgba(244, 67, 54, 0.37);
+  margin: 0;
+  padding: 0;
+}
+
+.open_loan {
+  background: white;
+  margin: 0;
+  padding: 0;
+}
+
+.payments {
+  padding: 10px 0;
+  background: rgb(245, 245, 245);
+}
+
+.ava {
+  width: 200px;
+  height: 200px;
 }

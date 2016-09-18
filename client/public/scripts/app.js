@@ -1,45 +1,5 @@
 'use strict';
 
-/* jQuery plugin to serialize form to Obj */
-$.fn.serializeToObject = function () {
-  let o = {},
-      a = this.serializeArray();
-
-  $.each(a, function() {
-    if (o[this.name] != undefined) {
-      if (!o[this.name].push) o[this.name] = [o[this.name]];
-      o[this.name].push(this.value || '');
-    } else {
-      o[this.name] = this.value || '';
-    }
-  });
-  return o;
-};
-
-/* Socket Router class */
-class MagicSocketRouter {
-  constructor (socket) {
-    this.socket = socket;
-  }
-
-  listenForm (form, paramsList = []) {
-    const event = paramsList[0][0],
-          formParams = paramsList[0][1],
-          successEvent = paramsList[1][0],
-          onSuccess = paramsList[1][1],
-          errorEvent = paramsList[2][0],
-          onError = paramsList[2][1];
-
-    form.addEventListener('submit', (ev) => {
-      ev.preventDefault();
-      this.socket.emit(event, formParams(form));
-    });
-
-    this.socket.on(successEvent, onSuccess);
-    this.socket.on(errorEvent, onError);
-  }
-}
-
 window.addEventListener('load', () => {
   const socket = io();
   const sRouter = new MagicSocketRouter(socket);
@@ -52,7 +12,7 @@ window.addEventListener('load', () => {
     }],
     ['person found', (msg) => {
       console.log(msg);
-      // window.location = `profile/${msg.id}`;
+      window.location = `profile/${msg.id}`;
     }],
     ['find person error', (msg) => {
       console.log(msg);
@@ -77,24 +37,6 @@ window.addEventListener('load', () => {
     ['new person error', (msg) => {
       console.log(msg);
       $(window.new_person_error).text(msg.error);
-    }]
-  ]);
-
-  /* New Person socket */
-  const newLoanForm = window.new_loan;
-  sRouter.listenForm(newLoanForm, [
-    ['new loan', (form) => {
-      return $(form).serializeToObject();
-    }],
-    ['loan created', (msg) => {
-      console.log('Create new loan', msg);
-      // window.new_loan.reset();
-      // Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
-      $(window.new_loan_modal).closeModal();
-    }],
-    ['new loan error', (msg) => {
-      console.log(msg);
-      $(window.new_loan_error).text(msg.error);
     }]
   ]);
 
