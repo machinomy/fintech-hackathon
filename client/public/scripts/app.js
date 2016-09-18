@@ -97,6 +97,13 @@ window.addEventListener('load', () => {
     if (v.length === 4) $('#passport_number').trigger('focus');
   });
 
+  $('#passport_number').on('keydown', (e) => {
+    let v = $(e.currentTarget).val();
+    if (v.length > 5) {
+      e.preventDefault();
+    }
+  });
+
   $('.modal-trigger').leanModal();
 
 });
