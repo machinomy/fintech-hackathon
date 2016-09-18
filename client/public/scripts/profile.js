@@ -8,7 +8,9 @@ window.addEventListener("load", () => {
   const newLoanForm = window.new_loan;
   sRouter.listenForm(newLoanForm, [
     ['new loan', (form) => {
-      return $(form).serializeToObject();
+      let form2 = $(form).serializeToObject();
+      form2.uuid = profile_uuid.getAttribute('data-uuid');
+      return form2;
     }],
     ['loan created', (msg) => {
       console.log('Create new loan', msg);

@@ -34,6 +34,7 @@ app
       let personInfo = responses[0].AddPerson;
       let creditsList = responses[1].credits;
       personInfo.img = '../images/ava.png';
+      personInfo.uuid = req.params.uuid;
       res.render(
         'profile', {
           profile: personInfo,

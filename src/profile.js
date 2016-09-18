@@ -53,18 +53,23 @@ class Profile {
 
 class Loan {
   constructor(params) {
-    this.amount = params.amount;
+    this.amount = params.credit_sum;
     this.percentage = params.percentage;
     this.time = params.time;
+    this.profileUuid = params.uuid;
   }
 
   create() {
     let params = {
-      amount: this.amount,
-      percentage: this.percentage,
-      time: this.time
+      uuid: this.profileUuid,
+      credit: {
+        amount: this.amount,
+        percentage: this.percentage,
+        time: this.time,
+        date: (new Date()).toLocaleDateString()
+      }
     };
-    return Bergator.post('loan', params);
+    return Bergator.post('credits', params);
   }
 }
 
