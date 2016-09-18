@@ -1,37 +1,87 @@
 doctype 5
 html
     head
-        link(rel='stylesheet', href='/styles/app.css')
-        script(src='/socket.io/socket.io.js')
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0')
+        title Pizda govna
+        link(href='../styles/material-fonts.css', rel='stylesheet')
+        link(href='../styles/materialize.min.css', type='text/css', rel='stylesheet', media='screen,projection')
+        link(href='../styles/app.css', type='text/css', rel='stylesheet', media='screen,projection')
 
-    body
-        each value, field in profile
-            span #{field}: #{value}
-            br
+    body(style='rgb(245, 245, 245)')
+        .row.center
+            a.btn-floating.btn-large.modal-trigger.new-loan-btn(href='#new_loan_modal')
+                i.material-icons add
+            a.btn-floating.btn-large.modal-trigger.check-loan-btn(href='#check_loan_modal')
+                i.material-icons visibility
 
-        div(style='border: 1px black solid')
+        ul.collection.with-header(style='background: white')
+            li.collection-header
+                .row
+                    .col.s4
+                        img.ava(src=profile.img)
+                    .col.s8
+                        h4 #{profile.firstName} #{profile.lastName}
+                        h4 #{profile.birthDate}
             each loan in loanList
-                span #{loan.id} #{loan.amount} #{loan.currency} at #{loan.percentage}%
-                if loan.active
-                    span
-                        button Vnosit
-                        button Zakrivat
-                br
+                li(data-uuid=loan.id, class=`${loan.status}_loan`)
+                    div(style='padding: 12px;')
+                        span Сумма кредита: #{loan.amount}#{loan.currency}
+                        span(style='margin-left: 10px;') Процент: #{loan.percentage}%
+                        span(style='margin-left: 10px;') Открыт: #{loan.date}
+                        span(style='margin-left: 10px;') Срок кредита: #{loan.time} мес.
+                        if loan.active
+                            a.secondary-content(href='#')
+                                i.close-loan.material-icons highlight_off
+                            a.secondary-content(href='#')
+                                i.add-payment.material-icons add
+                    .payments(name='payments')
+                        .sub_item
+                            span Сумма взноса: 3000$
+                            span.right Дата: 21.07.2011
+                        .sub_item
+                            span Сумма взноса: 3000$
+                            span.right Дата: 21.07.2011
+                        .sub_item
+                            span Сумма взноса: 3000$
+                            span.right Дата: 21.07.2011
             else
-                | No loans :sadface:
+                li No loans :~(
 
-        br
-        button#add_loan Plusik
-        | &nbsp;
-        button#eligibility_check_btn Znak voprosa
+        // check loan
+        #check_loan_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #27839c') μst
+            form#check_loan
+                .modal-content(style='height: initial')
+                    .row
+                        .input-field.col.s12
+                            input#credit_sum2.validate(name='credit_sum2', type='text')
+                            label(for='credit_sum2') Сумма кредита
+                        .col.s12
+                            .loan-check-result
+                .modal-footer
+                    button.btn(type='submit') Запросить
 
-        #check_modal(style='display: none')
-            div
-                form#eligibility_check
-                    input#eligibility_check_amount(type='text')
-                    button(type='submit') Zaprosit
-                #eligibility_result
+        // new loan
+        #new_loan_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #27839c') μst
+            form#new_loan
+                .modal-content(style='height: initial')
+                    .row
+                        .input-field.col.s12
+                            input#credit_sum.validate(name='credit_sum', type='text')
+                            label(for='credit_sum') Сумма кредита
+                        .input-field.col.s12
+                            input#percent.validate(name='percent', type='text')
+                            label(for='percent') Процентная ставка
+                        .input-field.col.s12
+                            input#time.validate(name='time', type='text')
+                            label(for='time') Срок кредита
+                .modal-footer
+                    button.btn(type='submit') Создать
 
-
-
+        script(src='/socket.io/socket.io.js')
+        script(src='../scripts/jquery-2.1.1.min.js')
+        script(src='../scripts/materialize.min.js')
+        script(src='/scripts/srouter.js')
         script(src='/scripts/profile.js')
