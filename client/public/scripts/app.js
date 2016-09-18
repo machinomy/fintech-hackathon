@@ -80,6 +80,24 @@ window.addEventListener('load', () => {
     }]
   ]);
 
+  /* New Person socket */
+  const newLoanForm = window.new_loan;
+  sRouter.listenForm(newLoanForm, [
+    ['new loan', (form) => {
+      return $(form).serializeToObject();
+    }],
+    ['loan created', (msg) => {
+      console.log('Create new loan', msg);
+      // window.new_loan.reset();
+      // Materialize.toast(`Person ${msg.first_name} ${msg.last_name} was created!`, 4000);
+      $(window.new_loan_modal).closeModal();
+    }],
+    ['new loan error', (msg) => {
+      console.log(msg);
+      $(window.new_loan_error).text(msg.error);
+    }]
+  ]);
+
   let picker = $('#birth_date').pickadate({
     selectMonths: true,
     selectYears: 55

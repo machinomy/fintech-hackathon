@@ -26,7 +26,7 @@ html(lang='en')
         // new person
         #new_person_modal.modal.modal-fixed-footer
             h1.header.center(style='color: #27839c') μst
-            form#new_person.col.s12
+            form#new_person
                 .modal-content(style='height: initial')
                     .row
                         .input-field.col.s4
@@ -55,6 +55,25 @@ html(lang='en')
                             label(for='birth_place') Место рождения
                 .modal-footer
                     button.btn(type='submit') Создать
+
+        // new loan
+        #new_loan_modal.modal.modal-fixed-footer
+            h1.header.center(style='color: #27839c') μst
+            form#new_loan
+                .modal-content
+                    .row
+                        .input-field
+                            input#credit_sum.validate(name='credit_sum', type='text')
+                            label(for='credit_sum') Сумма кредита
+                        .input-field
+                            input#percent.validate(name='percent', type='text')
+                            label(for='percent') Процентная ставка
+                        .input-field
+                            input#time.validate(name='time', type='text')
+                            label(for='time') Срок кредита
+                .modal-footer
+                    button.btn(type='submit') Создать
+
 
         // scripts
         script(src='/socket.io/socket.io.js')
