@@ -2,6 +2,10 @@ html, body {
   margin: 0;
 }
 
+#find_person {
+  margin-top: 150px;
+}
+
 h1 {
   color: darkgrey;
 }
@@ -79,4 +83,26 @@ h1 {
 .ava {
   width: 200px;
   height: 200px;
+}
+
+.loan-check-result {
+  text-align: center;
+  padding: 50px;
+  height: 100%;
+  font-size: 3em;
+}
+
+.loan-check-result.accept {
+  background-color: #99f39c;
+  color: #274c28;
+}
+
+.loan-check-result.decline {
+  background-color: #ffc2bd;
+  color: #613a37;
+}
+
+.modal h1 {
+  font-size: 3em;
+  padding: 40px;
 }

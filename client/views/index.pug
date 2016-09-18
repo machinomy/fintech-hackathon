@@ -12,9 +12,8 @@ html(lang='en')
         // find person
         .section.no-pad-bot
             .container
-                br
-                br
-                h1.header.center(style='color: #27839c') μst
+                h1.header.center(style='color: #585858') Billy Bird
+                h5.header.center(style='color: #585858') Бюро кредитных историй на блокчейне
                 form#find_person(style='text-align: center')
                     .input-field.center-align.col.s8
                         input#find_person_data.validate(type='text')
@@ -25,7 +24,7 @@ html(lang='en')
 
         // new person
         #new_person_modal.modal.modal-fixed-footer
-            h1.header.center(style='color: #27839c') μst
+            h1.header.center(style='color: #585858') Добавление заемщика
             form#new_person
                 .modal-content(style='height: initial')
                     .row
@@ -54,7 +53,7 @@ html(lang='en')
                             input#birth_place.validate(name='birth_place', type='text')
                             label(for='birth_place') Место рождения
                 .modal-footer
-                    button.btn(type='submit') Создать
+                    button.btn(type='submit') Добавить
 
         // scripts
         script(src='/socket.io/socket.io.js')

@@ -50,13 +50,13 @@ html
 
         // check loan
         #check_loan_modal.modal.modal-fixed-footer
-            h1.header.center(style='color: #27839c') μst
+            h1.header.center(style='color: #585858') Можно дать кредит?
             form#check_loan
                 .modal-content(style='height: initial')
                     .row
                         .input-field.col.s12
-                            input#credit_sum2.validate(name='credit_sum2', type='text')
-                            label(for='credit_sum2') Сумма кредита
+                            input#amount.validate(name='amount', type='text')
+                            label(for='amount') Сумма кредита
                         .col.s12
                             .loan-check-result
                 .modal-footer
@@ -64,7 +64,7 @@ html
 
         // new loan
         #new_loan_modal.modal.modal-fixed-footer
-            h1.header.center(style='color: #27839c') μst
+            h1.header.center(style='color: #585858') Оформление кредита
             form#new_loan
                 .modal-content(style='height: initial')
                     .row
@@ -78,7 +78,7 @@ html
                             input#time.validate(name='time', type='text')
                             label(for='time') Срок кредита
                 .modal-footer
-                    button.btn(type='submit') Создать
+                    button.btn(type='submit') Оформить
 
         script(src='/socket.io/socket.io.js')
         script(src='../scripts/jquery-2.1.1.min.js')
