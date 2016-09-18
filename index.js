@@ -54,7 +54,11 @@ sockets.on('connection', (socket) => {
       socket.emit('new person error', {error: 'empty query'});
       return;
     }
-    socket.emit('person created', params);
+    let person = new Profile(params);
+    let createReq = person.create();
+    createReq.then((body) => {
+      socket.emit('person created', body);
+    });
   });
 
   socket.on('check loan eligibility', (msg) => {
