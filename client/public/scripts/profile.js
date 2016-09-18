@@ -59,7 +59,7 @@ window.addEventListener("load", () => {
       console.log(msg);
     }]
   ]);
-  
+
   /* Check Loan socket */
   $('.close-loan').on('click', (ev) => {
     ev.preventDefault();
