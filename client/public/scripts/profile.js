@@ -54,6 +54,19 @@ window.addEventListener("load", () => {
     }]
   ]);
 
+  $('.close-loan').on('click', (ev) => {
+    ev.preventDefault();
+    let $this = $(ev.currentTarget);
+    let creditUuid = $this.closest('li').attr('data-uuid');
+    let personUuid = profile_uuid.getAttribute('data-uuid');
+
+    socket.emit('close loan', {personUuid, creditUuid});
+    socket.on('close loan result', (_) => {
+      location.reload();
+    });
+
+  });
+
 
   $('.modal-trigger').leanModal();
 });
